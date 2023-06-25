@@ -1,0 +1,25 @@
+from sympy import isprime
+
+def factorize_prime_number(n):
+    # Check if the number itself is prime
+    if isprime(n):
+        return n, 1
+    
+    # Find the smallest prime factor
+    for p in range(2, n):
+        if n % p == 0 and isprime(p):
+            q = n // p
+            if isprime(q):
+                return p, q
+    
+    return None
+
+if __name__ == '__main__':
+    n = int(input("Enter a prime number: "))
+    
+    factors = factorize_prime_number(n)
+    if factors:
+        p, q = factors
+        print(f"{n} = {p} * {q}")
+    else:
+        print("No prime factors found.")
